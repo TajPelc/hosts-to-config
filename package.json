@@ -1,17 +1,24 @@
 {
-  "name": "ssh-config-maker",
-  "version": "1.0.1",
-  "description": "Creates a ssh config based on hosts entries",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "name": "hosts-to-config",
+  "version": "0.1.2",
+  "description": "Creates SSH config entries based on hosts records",
+  "author": "Taj Pelc <https://github.com/TajPelc>",
   "license": "ISC",
   "dependencies": {
-    "byline": "^4.2.1",
-    "commander": "^2.9.0"
+    "byline": "4.2.1",
+    "commander": "2.9.0",
+    "core-js": "^0.6.0"
+  },
+  "devDependencies": {
+    "babel": "^4.6.0"
+  },
+  "engines" : {
+    "node" : ">=5.0.0"
   },
   "bin": {
     "hosts2config": "./src/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

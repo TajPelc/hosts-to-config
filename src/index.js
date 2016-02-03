@@ -5,15 +5,15 @@ var program = require('commander'),
 	fs = require('fs'),
 	byline = require('byline');
 
-var toString = str => '' + str;
-var toList = str => ('' + str).split(',');
+let toString = str => '' + str;
+let toList   = str => ('' + str).split(',');
 
 program
-	.version('0.1.0')
+	.version('0.1.2')
 	.option('-p, --prefix <prefix,prefix>', "Set prefix", toList, [])
 	.option('-f, --file <path>', "Input file, defaults to /etc/hosts", toString, '/etc/hosts')
-	.option('-u, --user <user>', "User", toString)
-	.option('-o, --out <out>', "Output file", toString)
+	.option('-u, --user <user>', "User to use", toString)
+	.option('-i, --identity <path>', "Identity File", toString)
 	.parse(process.argv);
 
 if (!fs.lstatSync(program.file).isFile()) {
@@ -26,9 +26,13 @@ if (program.prefix.length < 1) {
 	process.exit(1);
 }
 
-var stream = byline(fs.createReadStream(program.file), { encoding: 'utf8' });
+if (typeof program.identity == 'string' && program.identity.endsWith('.pub')) {
+	console.log('Private key required, public key supplied. --identity <path>');
+	process.exit(1);
+}
 
-var out = [];
+let out = [];
+let stream = byline(fs.createReadStream(program.file), { encoding: 'utf8' });
 
 stream.on('data', line => {
 	if (line.match(new RegExp('(' + program.prefix.join('|') + ')'))) {
