@@ -1,0 +1,17 @@
+{
+  "name": "ssh-config-maker",
+  "version": "1.0.1",
+  "description": "Creates a ssh config based on hosts entries",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "byline": "^4.2.1",
+    "commander": "^2.9.0"
+  },
+  "bin": {
+    "hosts2config": "./src/index.js"
+  }
+}
